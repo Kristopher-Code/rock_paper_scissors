@@ -1,5 +1,5 @@
-playRound();
-
+let playerScore = 0;
+let computerScore = 0;
 
 function computerPlay() {
 
@@ -8,8 +8,9 @@ function computerPlay() {
 }
 
 function playRound() {
-    let playerSelection = computerPlay();
+    let playerSelection = capitalize(window.prompt("Please enter Rock, Paper or Scissors"));
     let computerSelection = computerPlay();
+
     console.log(playerSelection);
     console.log(computerSelection);
 
@@ -18,23 +19,53 @@ function playRound() {
         case "PaperRock":
         case "ScissorsPaper":
         case "RockScissors":
-            return console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+            playerScore++;
+            console.log(`You win! ${playerSelection} beats ${computerSelection}. The score is now
+            ${playerScore} - ${computerScore}`);
+
 
 
         case "RockPaper":
         case "PaperScissors":
         case "ScissorsRock":
-            return console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
+            computerScore++;
+            console.log(computerScore);
+
+            return console.log(`You Lose! ${computerSelection} beats ${playerSelection}. The score is now
+            ${playerScore} - ${computerScore}`);
+
 
 
         case "RockRock":
         case "PaperPaper":
         case "ScissorsScissors":
-            return console.log(`It's a tie! ${playerSelection} can't beat ${computerSelection}`);
+            return console.log(`It's a tie! ${playerSelection} can't beat ${computerSelection}. The score is now
+            ${playerScore} - ${computerScore}`);
     }
 }
 
+function game() {
+
+    for (let i = 0; i < 5; i++) {
+        playRound();
+    }
+
+    if (playerScore > computerScore) {
+        console.log("You won!");
+    } else if (computerScore > playerScore) {
+        console.log("You lose. Lol");
+    } else {
+        console.log("It's a draw!");
+    }
+}
+
+// Helper Functions
+
+function capitalize(string) {
+    return string.charAt(0).toUpperCase()
+        + string.slice(1).toLowerCase();
+
+}
 
 
-
-
+game();
