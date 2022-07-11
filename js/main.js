@@ -11,9 +11,7 @@ function playRound() {
     let playerSelection = capitalize(window.prompt("Please enter Rock, Paper or Scissors"));
     let computerSelection = computerPlay();
 
-    console.log(playerSelection);
-    console.log(computerSelection);
-
+    
     switch (playerSelection + computerSelection) {
 
         case "PaperRock":
@@ -22,6 +20,7 @@ function playRound() {
             playerScore++;
             console.log(`You win! ${playerSelection} beats ${computerSelection}. The score is now
             ${playerScore} - ${computerScore}`);
+            break;
 
 
 
@@ -29,18 +28,18 @@ function playRound() {
         case "PaperScissors":
         case "ScissorsRock":
             computerScore++;
-            console.log(computerScore);
-
-            return console.log(`You Lose! ${computerSelection} beats ${playerSelection}. The score is now
+            console.log(`You Lose! ${computerSelection} beats ${playerSelection}. The score is now
             ${playerScore} - ${computerScore}`);
+            break;
 
 
 
         case "RockRock":
         case "PaperPaper":
         case "ScissorsScissors":
-            return console.log(`It's a tie! ${playerSelection} can't beat ${computerSelection}. The score is now
+            console.log(`It's a tie! ${playerSelection} can't beat ${computerSelection}. The score is now
             ${playerScore} - ${computerScore}`);
+            break;
     }
 }
 
