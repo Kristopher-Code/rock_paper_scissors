@@ -1,17 +1,20 @@
 let playerScore = 0;
 let computerScore = 0;
+let playerSelection;
+let computerSelection;
+const computerChoice = ["Rock", "Paper", "Scissors"];
+
+function playerPlay() {
+    const playerSelection = capitalize(window.prompt("Please enter Rock, Paper or Scissors"));
+    return playerSelection;
+}
 
 function computerPlay() {
-
-    let computerChoice = ["Rock", "Paper", "Scissors"];
     return computerChoice[Math.floor(Math.random() * 3)];
 }
 
-function playRound() {
-    let playerSelection = capitalize(window.prompt("Please enter Rock, Paper or Scissors"));
-    let computerSelection = computerPlay();
+function playRound(playerSelection, computerSelection) {    
 
-    
     switch (playerSelection + computerSelection) {
 
         case "PaperRock":
@@ -46,7 +49,9 @@ function playRound() {
 function game() {
 
     for (let i = 0; i < 5; i++) {
-        playRound();
+        playerSelection = playerPlay();
+        computerSelection = computerPlay();
+        playRound(playerSelection, computerSelection);
     }
 
     if (playerScore > computerScore) {
