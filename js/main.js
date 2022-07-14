@@ -15,13 +15,12 @@ selections.forEach((selection) => {
 function computerPlay() {
     let computerChoice = ["Rock", "Paper", "Scissors"];
     return computerChoice[Math.floor(Math.random() * 3)];
-
 }
 
 function playRound(playerSelection, computerSelection) {
 
     let result = "";
-
+    let end = "";
 
     switch (playerSelection + computerSelection) {
 
@@ -29,58 +28,48 @@ function playRound(playerSelection, computerSelection) {
         case "ScissorsPaper":
         case "RockScissors":
             playerScore++;
-            result += (`You win! ${playerSelection} beats ${computerSelection}.`);
+            result += (`You win! Your ${playerSelection} beats the RNGs ${computerSelection}. Yay!`);
+            if (playerScore === 5) {
+                end += (`<br> You won the game! Refresh to play again.`);
+                disableButtons();
+            }
             break;
-
 
         case "RockPaper":
         case "PaperScissors":
         case "ScissorsRock":
             computerScore++;
-            result += (`You Lose! ${computerSelection} beats ${playerSelection}.`);
+            result += (`You Lose! The RNGs ${computerSelection} beats your ${playerSelection}. ;_;`);
+            if (computerScore === 5) {
+                end += (`<br> You lost the game! Refresh to play again.`);
+                disableButtons();
+            }
             break;
-
 
         case "RockRock":
         case "PaperPaper":
         case "ScissorsScissors":
-            result += (`It's a tie! ${playerSelection} can't beat ${computerSelection}.`);
+            result += (`It's a tie! Your ${playerSelection} can't beat the RNGs ${computerSelection}.
+            In this version at least..`);
+            if (playerScore === 5 || computerScore === 5) {
+                disableButtons();
+            }
             break;
     }
-    document.getElementById('result').innerText = result
-
+    document.getElementById('result').innerHTML += result + "<br>";
+    document.getElementById('end').innerHTML += end;
     return
-
-
 }
 
 function updateScore() {
+
     document.getElementById("p-score").textContent = playerScore;
     document.getElementById("c-score").textContent = computerScore;
 }
 
-// function game(playerSelection) {
+function disableButtons() {
 
-//     for (let i = 0; i < 5; i++) {
-//         computerSelection = computerPlay();
-//         playRound(playerSelection);
-//     }
-
-//     if (playerScore > computerScore) {
-//         console.log("You won!");
-//     } else if (computerScore > playerScore) {
-//         console.log("You lose. Lol");
-//     } else {
-//         console.log("It's a draw!");
-//     }
-// }
-
-// // Helper Functions
-
-// function capitalize(string) {
-//     return string.charAt(0).toUpperCase()
-//         + string.slice(1).toLowerCase();
-
-// }
-
-
+    selections.forEach(Element => {
+        Element.disabled = true;
+    });
+};
