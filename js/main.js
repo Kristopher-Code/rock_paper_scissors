@@ -1,19 +1,27 @@
 let playerScore = 0;
 let computerScore = 0;
-let playerSelection;
-let computerSelection;
-const computerChoice = ["Rock", "Paper", "Scissors"];
 
-function playerPlay() {
-    const playerSelection = capitalize(window.prompt("Please enter Rock, Paper or Scissors"));
-    return playerSelection;
-}
+const selections = document.querySelectorAll(".selections");
+
+selections.forEach((selection) => {
+    selection.addEventListener("click", function () {
+        const playerSelection = this.textContent;
+        const computerSelection = computerPlay();
+        playRound(playerSelection, computerSelection);
+        updateScore();
+    })
+})
 
 function computerPlay() {
+    let computerChoice = ["Rock", "Paper", "Scissors"];
     return computerChoice[Math.floor(Math.random() * 3)];
+
 }
 
-function playRound(playerSelection, computerSelection) {    
+function playRound(playerSelection, computerSelection) {
+
+    let result = "";
+
 
     switch (playerSelection + computerSelection) {
 
@@ -21,55 +29,58 @@ function playRound(playerSelection, computerSelection) {
         case "ScissorsPaper":
         case "RockScissors":
             playerScore++;
-            console.log(`You win! ${playerSelection} beats ${computerSelection}. The score is now
-            ${playerScore} - ${computerScore}`);
+            result += (`You win! ${playerSelection} beats ${computerSelection}.`);
             break;
-
 
 
         case "RockPaper":
         case "PaperScissors":
         case "ScissorsRock":
             computerScore++;
-            console.log(`You Lose! ${computerSelection} beats ${playerSelection}. The score is now
-            ${playerScore} - ${computerScore}`);
+            result += (`You Lose! ${computerSelection} beats ${playerSelection}.`);
             break;
-
 
 
         case "RockRock":
         case "PaperPaper":
         case "ScissorsScissors":
-            console.log(`It's a tie! ${playerSelection} can't beat ${computerSelection}. The score is now
-            ${playerScore} - ${computerScore}`);
+            result += (`It's a tie! ${playerSelection} can't beat ${computerSelection}.`);
             break;
     }
-}
+    document.getElementById('result').innerText = result
 
-function game() {
+    return
 
-    for (let i = 0; i < 5; i++) {
-        playerSelection = playerPlay();
-        computerSelection = computerPlay();
-        playRound(playerSelection, computerSelection);
-    }
-
-    if (playerScore > computerScore) {
-        console.log("You won!");
-    } else if (computerScore > playerScore) {
-        console.log("You lose. Lol");
-    } else {
-        console.log("It's a draw!");
-    }
-}
-
-// Helper Functions
-
-function capitalize(string) {
-    return string.charAt(0).toUpperCase()
-        + string.slice(1).toLowerCase();
 
 }
 
+function updateScore() {
+    document.getElementById("p-score").textContent = playerScore;
+    document.getElementById("c-score").textContent = computerScore;
+}
 
-game();
+// function game(playerSelection) {
+
+//     for (let i = 0; i < 5; i++) {
+//         computerSelection = computerPlay();
+//         playRound(playerSelection);
+//     }
+
+//     if (playerScore > computerScore) {
+//         console.log("You won!");
+//     } else if (computerScore > playerScore) {
+//         console.log("You lose. Lol");
+//     } else {
+//         console.log("It's a draw!");
+//     }
+// }
+
+// // Helper Functions
+
+// function capitalize(string) {
+//     return string.charAt(0).toUpperCase()
+//         + string.slice(1).toLowerCase();
+
+// }
+
+
